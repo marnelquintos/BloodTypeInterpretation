@@ -90,3 +90,37 @@ while True:
     except ValueError:
         print(invalid_result)
 
+
+# ABORh function that contains a dictionary
+def aborh(aborh_interp, user_input_reactions):
+    aborh_to_reactions = {
+        "AB Pos": [user_input_reactions[0] >= 1, user_input_reactions[1] >= 1, user_input_reactions[2] >= 1,
+                   user_input_reactions[3] == 0, user_input_reactions[4] == 0, user_input_reactions[5] == 0],
+        "AB Neg": [user_input_reactions[0] >= 1, user_input_reactions[1] >= 1, user_input_reactions[2] == 0,
+                   user_input_reactions[3] == 0, user_input_reactions[4] == 0, user_input_reactions[5] == 0],
+        "A Pos": [user_input_reactions[0] >= 1, user_input_reactions[1] == 0, user_input_reactions[2] >= 1,
+                  user_input_reactions[3] == 0, user_input_reactions[4] == 0, user_input_reactions[5] >= 1],
+        "A Neg": [user_input_reactions[0] >= 1, user_input_reactions[1] == 0, user_input_reactions[2] == 0,
+                  user_input_reactions[3] == 0, user_input_reactions[4] == 0, user_input_reactions[5] >= 1],
+        "B Pos": [user_input_reactions[0] == 0, user_input_reactions[1] >= 1, user_input_reactions[2] >= 1,
+                  user_input_reactions[3] == 0, user_input_reactions[4] >= 1, user_input_reactions[5] == 0],
+        "B Neg": [user_input_reactions[0] == 0, user_input_reactions[1] >= 1, user_input_reactions[2] == 0,
+                  user_input_reactions[3] == 0, user_input_reactions[4] >= 1, user_input_reactions[5] == 0],
+        "O Pos": [user_input_reactions[0] == 0, user_input_reactions[1] == 0, user_input_reactions[2] >= 1,
+                  user_input_reactions[3] == 0, user_input_reactions[4] >= 1, user_input_reactions[5] >= 1],
+        "O Neg": [user_input_reactions[0] == 0, user_input_reactions[1] == 0, user_input_reactions[2] == 0,
+                  user_input_reactions[3] == 0, user_input_reactions[4] >= 1, user_input_reactions[5] >= 1]
+    }
+    # Loop through the dictionary to identify the key based on the values
+    for interpretation in aborh_interp:
+        if interpretation in aborh_to_reactions and all(aborh_to_reactions[interpretation]):
+            return interpretation
+    return "INVALID\nInterpretation could not be determined. Please check for ABO discrepancy and/or " \
+           "validity of Anti-D control."
+
+
+# List of ABORh types
+aborh_interpretations = ["AB Pos", "AB Neg", "A Pos", "A Neg", "B Pos", "B Neg", "O Pos", "O Neg"]
+
+# Print ABORh interpretation using the aborh function
+print("\nABORh interpretation: ", aborh(aborh_interpretations, user_input))
