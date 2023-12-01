@@ -8,13 +8,15 @@ print("Based on your reactions, this application will give you an ABORh interpre
 print("Please input your reactions using a numerical value ranging from 0 to 4 (ex. 0, 1, 2, 3, 4)")
 print("Type 'quit' to end the application at any time.\n")
 
-# Assign variable for invalid result
+# Assign variable for invalid result message
 invalid_result = "\nInvalid result.\nPlease try again using a numerical value ranging from 0 to 4 (ex. 0, 1, 2, 3, 4)" \
                  " or type 'quit' to end the application.\n"
 
+# Assign variable for quit input message
 quit_input = "\nYou have requested to quit the application. Feel free to run the application again at any time. " \
              "The application has now ended."
 
+# Begin application
 while True:
 
     # User input list
@@ -148,7 +150,7 @@ while True:
             if interpretation in aborh_to_reactions and all(aborh_to_reactions[interpretation]):
                 return interpretation
         return "INVALID\nInterpretation could not be determined. Please check for ABO discrepancy and/or " \
-               "validity of Anti-D control.\n"
+               "validity of Anti-D control."
 
 
     # List of ABORh types
@@ -156,3 +158,24 @@ while True:
 
     # Print ABORh interpretation using the aborh function
     print("\nABORh interpretation: ", aborh(aborh_interpretations, user_input))
+
+    # Ask user to either rerun or end application
+    while True:
+        rerun_application = input("\nWould you like to rerun this application? Type 'y' to rerun or type 'n' to "
+                                  "end the application: ")
+        if rerun_application.lower() == 'n':
+            print("\nYou have chosen to end the application. Feel free to run the application again at any time. "
+                  "The application has now ended.")
+            sys.exit()
+        elif rerun_application.lower() == 'y':
+            print("\nYou have chosen to rerun this application again.")
+            print("Please input your reactions using a numerical value ranging from 0 to 4 (ex. 0, 1, 2, 3, 4).")
+            print("Type 'quit' to end the application at any time.\n")
+            break
+        elif rerun_application.lower() == 'quit':
+            print(quit_input)
+            sys.exit()
+        else:
+            print(
+                "\nInvalid response.\nWould you like to rerun this application? Type 'y' to rerun or type 'n' to end "
+                "the application")
